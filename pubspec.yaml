@@ -1,6 +1,6 @@
 name: flutter_show_when_locked
 description: "A Flutter plugin that allows your flutter apps to appear over the lock screen."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/AhsanSarwar45/flutter_show_when_locked
 repository: https://github.com/AhsanSarwar45/flutter_show_when_locked
 

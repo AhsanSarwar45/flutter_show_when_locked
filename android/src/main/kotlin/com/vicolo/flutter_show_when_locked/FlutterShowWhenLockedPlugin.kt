@@ -46,15 +46,20 @@ override fun onDetachedFromActivityForConfigChanges() {
     if(call.method == "show"){
       this.activity?.setShowWhenLocked(true);
       this.activity?.setTurnScreenOn(true);
-      this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-);
+      this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+      this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+      this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+      this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
       Log.d("FlutterShowWhenLocked", "App shown on lock screen")
       result.success("Success");
     }
     else if(call.method == "hide"){
       this.activity?.setShowWhenLocked(false);
       this.activity?.setTurnScreenOn(false);
-      this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+      this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+      this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+      this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+      this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
       Log.d("FlutterShowWhenLocked", "App hidden on lock screen")
        result.success("Success");   
     }
