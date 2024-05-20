@@ -11,6 +11,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import android.view.WindowManager;
+import android.os.Build;
 
 /** FlutterShowWhenLockedPlugin */
 class FlutterShowWhenLockedPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -44,8 +45,10 @@ override fun onDetachedFromActivityForConfigChanges() {
 
   override fun onMethodCall(call: MethodCall, result: Result) {
     if(call.method == "show"){
-      this.activity?.setShowWhenLocked(true);
-      this.activity?.setTurnScreenOn(true);
+      if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1){
+        this.activity?.setShowWhenLocked(true);
+        this.activity?.setTurnScreenOn(true);
+      }
       this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
       this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
       this.activity?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
@@ -54,8 +57,10 @@ override fun onDetachedFromActivityForConfigChanges() {
       result.success("Success");
     }
     else if(call.method == "hide"){
-      this.activity?.setShowWhenLocked(false);
-      this.activity?.setTurnScreenOn(false);
+       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1){
+          this.activity?.setShowWhenLocked(false);
+          this.activity?.setTurnScreenOn(false);
+       }
       this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
       this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
       this.activity?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
